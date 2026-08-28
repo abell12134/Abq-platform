@@ -1,0 +1,21 @@
+# 政策网页抓取白名单（仅允许以下 host；防 SSRF）
+allowed_hosts:
+  - www.csrc.gov.cn
+  - csrc.gov.cn
+  - www.sse.com.cn
+  - sse.com.cn
+  - www.szse.cn
+  - szse.cn
+  - www.gov.cn
+  - gov.cn
+  - www.pbc.gov.cn
+  - pbc.gov.cn
+  - www.ndrc.gov.cn
+  - ndrc.gov.cn
+
+sources:
+  - id: csrc_rules
+    name: 证监会-规范性文件
+    issuer: 证监会
+    list_url: https://www.csrc.gov.cn/csrc/c101953/common_list.shtml
+    max_per_run: 3

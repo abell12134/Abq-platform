@@ -1,0 +1,8 @@
+id: portfolio
+name: 组合诊断
+model_tier: primary
+tools:
+  - list_factors
+  - compute_factor
+  - factor_analysis
+prompt_id: portfolio-instructions

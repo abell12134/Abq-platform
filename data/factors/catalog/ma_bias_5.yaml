@@ -1,0 +1,54 @@
+id: ma_bias_5
+name: 5日均线偏离
+origin: catalog
+status: passed_auto
+theme:
+- momentum
+universe: csi300
+formula: sub(div(close, ts_mean(close, 5)), 1)
+expr:
+  op: sub
+  args:
+  - op: div
+    args:
+    - var: close
+    - op: ts_mean
+      args:
+      - var: close
+      - const: 5
+  - const: 1
+hypothesis: 价格高于短均线表示短线强势。
+forward_days: 5
+metrics:
+  mode: cs
+  ic_stats:
+    ic_mean: -0.427307
+    ic_std: 0.221952
+    icir: -1.9252
+    ic_pos_ratio: 0.0
+    valid_days: 71
+  gate1_passed: true
+  gate1_detail:
+    ic_mean: -0.427307
+    icir: -1.9252
+    threshold_ic_mean: 0.02
+    threshold_icir: 0.25
+  gate2_passed: false
+  gate2_detail:
+    max_corr: 0.836
+    corr_with: ma_bias_20
+    threshold: 0.7
+    skipped: false
+  gate3_passed: true
+  gate3_detail:
+    ic_is_mean: -0.416851
+    ic_oos_mean: -0.450598
+    threshold_oos: 0.01
+  gate4_passed: true
+  gate4_note: ok
+  status: rejected
+  reject_reason: 与库内因子相关过高
+reject_reason: 与库内因子相关过高
+builtin: true
+created_at: '2026-08-25T08:02:00Z'
+updated_at: '2026-08-25T09:15:34Z'

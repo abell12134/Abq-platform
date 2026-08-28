@@ -1,0 +1,57 @@
+.klineChart {
+  --kline-up: var(--up);
+  --kline-down: var(--down);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(180deg, rgba(232, 145, 58, 0.04), transparent 40%),
+    var(--bg);
+  padding: 10px 10px 8px;
+}
+
+.klineChartHd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 10px;
+  font-family: var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 8px;
+}
+
+.klineChartHd span:first-child {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.klineChartSvg {
+  width: 100%;
+  height: 220px;
+  display: block;
+}
+
+.klineWick {
+  stroke-width: 1;
+}
+
+.klineSplit {
+  stroke: var(--line);
+  stroke-width: 1;
+  opacity: 0.7;
+}
+
+.klineChartAxis {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--faint);
+}
+
+.ticketSection .klineChart {
+  margin-top: 4px;
+}

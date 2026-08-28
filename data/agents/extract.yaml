@@ -1,0 +1,5 @@
+id: extract
+name: 数据抽取
+model_tier: local
+tools: []
+prompt_id: extract-instructions

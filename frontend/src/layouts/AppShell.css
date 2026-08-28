@@ -1,0 +1,67 @@
+.app {
+  display: grid;
+  grid-template-columns: var(--sidebar) 1fr;
+  height: 100%;
+  position: relative;
+}
+
+.app::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent);
+  z-index: 12;
+  pointer-events: none;
+}
+
+.main {
+  display: grid;
+  grid-template-rows: 44px 1fr;
+  min-width: 0;
+  min-height: 0;
+  position: relative;
+}
+
+.stage {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.page {
+  display: none;
+  height: 100%;
+  min-height: 0;
+}
+
+.page.show {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.dockedPage.show {
+  overflow: auto;
+}
+
+.dock {
+  flex-shrink: 0;
+  padding: 0 0 10px;
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+  z-index: 2;
+}
+
+.dockGlobal .chatDock {
+  width: min(720px, calc(100% - 48px));
+  margin: 0 auto;
+  border-top: none;
+  background: transparent;
+  padding-bottom: 8px;
+}

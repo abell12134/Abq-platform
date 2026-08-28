@@ -1,0 +1,324 @@
+.knLib {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.knTopBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.knTabs {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.knTab {
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  border-radius: var(--radius);
+  padding: 0.4rem 0.85rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  font-family: var(--mono);
+  letter-spacing: 0.04em;
+}
+
+.knTabActive {
+  color: var(--accent);
+  border-color: var(--accent-line);
+  background: var(--accent-dim);
+}
+
+.knSymbolField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.knSymbolField input {
+  min-width: 140px;
+}
+
+.knArchiveGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.knToolbar {
+  margin-top: 0.25rem;
+}
+
+.knGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.knPanel {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  background: rgba(19, 24, 32, 0.72);
+}
+
+.knPanel h3 {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+}
+
+.knRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.knRow label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.knRow input,
+.knRow select {
+  min-width: 140px;
+}
+
+.knFile input[type="file"] {
+  font-size: 0.75rem;
+}
+
+.knDelta {
+  margin: 0 0 0.5rem;
+  padding: 0.5rem;
+  border-radius: 6px;
+  background: var(--accent-dim);
+}
+
+.knList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 280px;
+  overflow: auto;
+}
+
+.knList li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.85rem;
+}
+
+.knList time {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.knList em {
+  font-style: normal;
+  font-size: 0.75rem;
+  color: var(--accent);
+}
+
+.knSearchRow {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.knSearchRow input {
+  flex: 1;
+}
+
+.knGraph {
+  grid-column: 1 / -1;
+}
+
+.knGraphHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.35rem;
+}
+
+.knGraphHead h3 {
+  margin: 2px 0 0;
+}
+
+.knGraphToolbar {
+  align-items: flex-end;
+}
+
+.knPrimaryAction {
+  min-width: 7rem;
+}
+
+.knTextBtn {
+  border: none;
+  background: none;
+  color: var(--accent);
+  font-size: 0.82rem;
+  cursor: pointer;
+  padding: 0.45rem 0.25rem;
+}
+
+.knGraphEmpty {
+  padding: 1.5rem;
+  text-align: center;
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+}
+
+.knGraphAdvanced {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.knSearchFoot {
+  margin-top: 0.75rem;
+}
+
+.knGraphHint {
+  margin: 0 0 0.5rem;
+}
+
+.knGraphStats,
+.knGraphInfo {
+  margin: 0 0 0.5rem;
+}
+
+.knGraphInfo {
+  padding: 0.5rem;
+  border-radius: 6px;
+  background: rgba(34, 197, 94, 0.08);
+}
+
+.knGraphEdges {
+  max-height: 220px;
+}
+
+.knEdgeType {
+  font-size: 0.72rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.knGraphActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: flex-end;
+  margin: 0.75rem 0;
+}
+
+.knGraphActions label {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.knGraphPolicyUrl {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--line);
+}
+
+.knGraphPolicyUrl h4 {
+  margin: 0 0 0.5rem;
+  font-size: 0.88rem;
+}
+
+.knGrow {
+  flex: 2;
+  min-width: 240px;
+}
+
+.knGrow input {
+  width: 100%;
+}
+
+.knForceStage {
+  position: relative;
+  border: 1px solid var(--accent-line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+  height: 400px;
+  background:
+    radial-gradient(ellipse at 50% 42%, rgba(232, 145, 58, 0.1), transparent 58%),
+    #05060a;
+}
+
+.knForceStage::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0, 0, 0, 0.08) 3px,
+    rgba(0, 0, 0, 0.08) 4px
+  );
+  opacity: 0.35;
+}
+
+.knForceHud {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.knForceHud strong {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.knForceHudTL {
+  top: 10px;
+  left: 12px;
+}
+
+.knForceHudTR {
+  top: 10px;
+  right: 12px;
+  text-align: right;
+}
+
+.knForceWrap {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+  background: #05060a;
+}

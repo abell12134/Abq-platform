@@ -1,0 +1,50 @@
+id: pv_corr_20
+name: 量价相关20日
+origin: catalog
+status: passed_auto
+theme:
+- volume
+- momentum
+universe: csi300
+formula: ts_corr(close, volume, 20)
+expr:
+  op: ts_corr
+  args:
+  - var: close
+  - var: volume
+  - const: 20
+hypothesis: 价量正相关表示趋势受资金确认，动量更易延续。
+forward_days: 5
+metrics:
+  mode: cs
+  ic_stats:
+    ic_mean: -0.025779
+    ic_std: 0.355881
+    icir: -0.0724
+    ic_pos_ratio: 0.4464
+    valid_days: 56
+  gate1_passed: false
+  gate1_detail:
+    ic_mean: -0.025779
+    icir: -0.0724
+    threshold_ic_mean: 0.02
+    threshold_icir: 0.25
+  gate2_passed: true
+  gate2_detail:
+    max_corr: -0.2082
+    corr_with: rel_volume_5
+    threshold: 0.7
+    skipped: false
+  gate3_passed: true
+  gate3_detail:
+    ic_is_mean: -0.026866
+    ic_oos_mean: -0.023284
+    threshold_oos: 0.01
+  gate4_passed: true
+  gate4_note: ok
+  status: rejected
+  reject_reason: 初筛未过
+reject_reason: 初筛未过
+builtin: true
+created_at: '2026-08-25T08:02:00Z'
+updated_at: '2026-08-25T09:15:38Z'

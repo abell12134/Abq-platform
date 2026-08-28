@@ -1,0 +1,32 @@
+# Secrets & local settings
+.env
+.env.local
+.env.*.local
+.claude/
+.vscode/
+.idea/
+*.local
+
+# Python
+.venv/
+backend/.venv/
+**/__pycache__/
+*.pyc
+.ruff_cache/
+backend/.ruff_cache/
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
+# OS
+.DS_Store
+
+# Large / runtime data (qlib ~1.3G; GitHub file limit 100MB)
+data/qib/
+data/paths/
+data/graph/
+data/knowledge/
+data/memory.db
+data/cache/
+data/factors/runs/

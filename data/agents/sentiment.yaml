@@ -1,0 +1,8 @@
+id: sentiment
+name: 舆情
+model_tier: primary
+tools:
+  - fetch_sentiment
+  - get_knowledge_delta
+  - search_knowledge
+prompt_id: sentiment-instructions

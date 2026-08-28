@@ -1,0 +1,53 @@
+.factorMineBanner {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--line-2);
+  border-radius: 12px;
+  background: var(--bg-2);
+}
+
+.factorMineBanner.running {
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--line));
+}
+
+.factorMineBannerHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-size: 12px;
+}
+
+.factorMineBannerHead strong {
+  font-size: 13px;
+}
+
+.factorMineBannerMeta {
+  color: var(--faint);
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+.factorMineDismiss {
+  margin-left: auto;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  border-radius: 6px;
+  padding: 2px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.factorMineDismiss:hover {
+  color: var(--text);
+  border-color: var(--line-2);
+}
+
+.factorMineError {
+  color: #e88;
+  font-size: 12px;
+  margin-top: 4px;
+}

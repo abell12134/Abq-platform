@@ -1,0 +1,530 @@
+factors:
+  gp_mkt_5cddb9:
+    id: gp_mkt_5cddb9
+    name: GP择时 abs(abs(mkt_close))
+    origin: gp
+    status: passed_auto
+    theme:
+    - market
+    universe: market
+    formula: abs(abs(mkt_close))
+    expr:
+      op: abs
+      args:
+      - op: abs
+        args:
+        - var: mkt_close
+    hypothesis: ''
+    forward_days: 5
+    metrics:
+      mode: timing
+      ic_stats:
+        ic_mean: -0.897618
+        ic_std: null
+        icir: null
+        ic_pos_ratio: null
+        valid_days: 75
+      gate1_passed: true
+      gate1_detail:
+        ic_mean: -0.897618
+        threshold_ic_mean: 0.05
+      gate2_passed: true
+      gate2_detail:
+        skipped: true
+      gate3_passed: true
+      gate3_detail:
+        ic_is_mean: -0.89869
+        ic_oos_mean: -0.911205
+        threshold_oos: 0.01
+      gate4_passed: true
+      gate4_note: GP 可无假设
+      status: passed_auto
+      reject_reason: 过自动关卡，待补经济逻辑
+    reject_reason: 过自动关卡，待补经济逻辑
+    builtin: false
+    created_at: '2026-08-25T09:12:54Z'
+    updated_at: '2026-08-25T09:15:28Z'
+  gp_mkt_ac7709:
+    id: gp_mkt_ac7709
+    name: GP择时 abs(mkt_close)
+    origin: gp
+    status: passed_auto
+    theme:
+    - market
+    universe: market
+    formula: abs(mkt_close)
+    expr:
+      op: abs
+      args:
+      - var: mkt_close
+    hypothesis: ''
+    forward_days: 5
+    metrics:
+      mode: timing
+      ic_stats:
+        ic_mean: -0.897618
+        ic_std: null
+        icir: null
+        ic_pos_ratio: null
+        valid_days: 75
+      gate1_passed: true
+      gate1_detail:
+        ic_mean: -0.897618
+        threshold_ic_mean: 0.05
+      gate2_passed: true
+      gate2_detail:
+        skipped: true
+      gate3_passed: true
+      gate3_detail:
+        ic_is_mean: -0.89869
+        ic_oos_mean: -0.911205
+        threshold_oos: 0.01
+      gate4_passed: true
+      gate4_note: GP 可无假设
+      status: passed_auto
+      reject_reason: 过自动关卡，待补经济逻辑
+    reject_reason: 过自动关卡，待补经济逻辑
+    builtin: false
+    created_at: '2026-08-25T09:12:54Z'
+    updated_at: '2026-08-25T09:15:28Z'
+  gp_mkt_c42cde:
+    id: gp_mkt_c42cde
+    name: GP择时 add(sub(div(mkt_close, delay(mkt_close, …
+    origin: gp
+    status: passed_auto
+    theme:
+    - market
+    universe: market
+    formula: add(sub(div(mkt_close, delay(mkt_close, 20)), 1), mkt_amount)
+    expr:
+      op: add
+      args:
+      - op: sub
+        args:
+        - op: div
+          args:
+          - var: mkt_close
+          - op: delay
+            args:
+            - var: mkt_close
+            - const: 20
+        - const: 1
+      - var: mkt_amount
+    hypothesis: ''
+    forward_days: 5
+    metrics:
+      mode: timing
+      ic_stats:
+        ic_mean: -0.903516
+        ic_std: null
+        icir: null
+        ic_pos_ratio: null
+        valid_days: 55
+      gate1_passed: true
+      gate1_detail:
+        ic_mean: -0.903516
+        threshold_ic_mean: 0.05
+      gate2_passed: true
+      gate2_detail:
+        skipped: true
+      gate3_passed: true
+      gate3_detail:
+        ic_is_mean: -0.906212
+        ic_oos_mean: -0.895157
+        threshold_oos: 0.01
+      gate4_passed: true
+      gate4_note: GP 可无假设
+      status: passed_auto
+      reject_reason: 过自动关卡，待补经济逻辑
+    reject_reason: 过自动关卡，待补经济逻辑
+    builtin: false
+    created_at: '2026-08-25T09:12:54Z'
+    updated_at: '2026-08-25T09:15:27Z'
+  gp_mkt_f56079:
+    id: gp_mkt_f56079
+    name: GP择时 mkt_close
+    origin: gp
+    status: passed_auto
+    theme:
+    - market
+    universe: market
+    formula: mkt_close
+    expr:
+      var: mkt_close
+    hypothesis: ''
+    forward_days: 5
+    metrics:
+      mode: timing
+      ic_stats:
+        ic_mean: -0.897618
+        ic_std: null
+        icir: null
+        ic_pos_ratio: null
+        valid_days: 75
+      gate1_passed: true
+      gate1_detail:
+        ic_mean: -0.897618
+        threshold_ic_mean: 0.05
+      gate2_passed: true
+      gate2_detail:
+        skipped: true
+      gate3_passed: true
+      gate3_detail:
+        ic_is_mean: -0.89869
+        ic_oos_mean: -0.911205
+        threshold_oos: 0.01
+      gate4_passed: true
+      gate4_note: GP 可无假设
+      status: passed_auto
+      reject_reason: 过自动关卡，待补经济逻辑
+    reject_reason: 过自动关卡，待补经济逻辑
+    builtin: false
+    created_at: '2026-08-25T09:12:53Z'
+    updated_at: '2026-08-25T09:15:28Z'
+  llm_momentum_160ce0:
+    id: llm_momentum_160ce0
+    name: 区间位置动量
+    origin: llm
+    status: rejected
+    theme:
+    - momentum
+    universe: csi300
+    formula: ts_rank(close, 60)
+    expr:
+      op: ts_rank
+      args:
+      - var: close
+      - const: 60
+    hypothesis: 股价在近期价格区间中的位置越高，说明趋势强度越大，处于高位的股票更可能延续上涨
+    forward_days: 5
+    metrics:
+      mode: cs
+      ic_stats:
+        ic_mean: -0.769295
+        ic_std: 0.09124
+        icir: -8.4315
+        ic_pos_ratio: 0.0
+        valid_days: 16
+      gate1_passed: true
+      gate1_detail:
+        ic_mean: -0.769295
+        icir: -8.4315
+        threshold_ic_mean: 0.02
+        threshold_icir: 0.25
+      gate2_passed: false
+      gate2_detail:
+        max_corr: 0.9517
+        corr_with: ma_bias_20
+        threshold: 0.7
+        skipped: false
+      gate3_passed: true
+      gate3_detail:
+        ic_is_mean: -0.770436
+        ic_oos_mean: -0.766786
+        threshold_oos: 0.01
+      gate4_passed: true
+      gate4_note: ok
+      status: rejected
+      reject_reason: 与库内因子相关过高
+    reject_reason: 与库内因子相关过高
+    builtin: false
+    created_at: '2026-08-25T11:40:31Z'
+    updated_at: '2026-08-25T11:40:32Z'
+  llm_momentum_1b1ebf:
+    id: llm_momentum_1b1ebf
+    name: 相对强弱动量
+    origin: llm
+    status: rejected
+    theme:
+    - momentum
+    universe: csi300
+    formula: sub(div(div(close, mkt_close), delay(div(close, mkt_close), 20)), 1)
+    expr:
+      op: sub
+      args:
+      - op: div
+        args:
+        - op: div
+          args:
+          - var: close
+          - var: mkt_close
+        - op: delay
+          args:
+          - op: div
+            args:
+            - var: close
+            - var: mkt_close
+          - const: 20
+      - const: 1
+    hypothesis: 股价相对大盘强度比率持续走高说明资金偏好与领涨地位稳固，相对强弱动量具有延续性，跑输大盘者应被规避。
+    forward_days: 5
+    metrics:
+      mode: cs
+      ic_stats:
+        ic_mean: -0.727368
+        ic_std: 0.120573
+        icir: -6.0326
+        ic_pos_ratio: 0.0
+        valid_days: 55
+      gate1_passed: true
+      gate1_detail:
+        ic_mean: -0.727368
+        icir: -6.0326
+        threshold_ic_mean: 0.02
+        threshold_icir: 0.25
+      gate2_passed: false
+      gate2_detail:
+        max_corr: 0.9997
+        corr_with: mom_20
+        threshold: 0.7
+        skipped: false
+      gate3_passed: true
+      gate3_detail:
+        ic_is_mean: -0.722368
+        ic_oos_mean: -0.738545
+        threshold_oos: 0.01
+      gate4_passed: true
+      gate4_note: ok
+      status: rejected
+      reject_reason: 与库内因子相关过高
+    reject_reason: 与库内因子相关过高
+    builtin: false
+    created_at: '2026-08-25T11:39:14Z'
+    updated_at: '2026-08-25T11:39:15Z'
+  llm_momentum_5d00d6:
+    id: llm_momentum_5d00d6
+    name: 波动率调整动量
+    origin: llm
+    status: rejected
+    theme:
+    - momentum
+    universe: csi300
+    formula: div(sub(div(close, delay(close, 20)), 1), ts_std(sub(div(close, delay(close,
+      1)), 1), 20))
+    expr:
+      op: div
+      args:
+      - op: sub
+        args:
+        - op: div
+          args:
+          - var: close
+          - op: delay
+            args:
+            - var: close
+            - const: 20
+        - const: 1
+      - op: ts_std
+        args:
+        - op: sub
+          args:
+          - op: div
+            args:
+            - var: close
+            - op: delay
+              args:
+              - var: close
+              - const: 1
+          - const: 1
+        - const: 20
+    hypothesis: 高动量叠加低波动表明趋势由资金持续推动而非情绪脉冲，风险调整后的动量信号更纯净可靠，此类股票应持续走强。
+    forward_days: 5
+    metrics:
+      mode: cs
+      ic_stats:
+        ic_mean: -0.734559
+        ic_std: 0.123159
+        icir: -5.9643
+        ic_pos_ratio: 0.0
+        valid_days: 55
+      gate1_passed: true
+      gate1_detail:
+        ic_mean: -0.734559
+        icir: -5.9643
+        threshold_ic_mean: 0.02
+        threshold_icir: 0.25
+      gate2_passed: false
+      gate2_detail:
+        max_corr: 0.9853
+        corr_with: mom_20
+        threshold: 0.7
+        skipped: false
+      gate3_passed: true
+      gate3_detail:
+        ic_is_mean: -0.729587
+        ic_oos_mean: -0.745675
+        threshold_oos: 0.01
+      gate4_passed: true
+      gate4_note: ok
+      status: rejected
+      reject_reason: 与库内因子相关过高
+    reject_reason: 与库内因子相关过高
+    builtin: false
+    created_at: '2026-08-25T11:39:13Z'
+    updated_at: '2026-08-25T11:39:14Z'
+  llm_momentum_e79867:
+    id: llm_momentum_e79867
+    name: 动量加速度
+    origin: llm
+    status: rejected
+    theme:
+    - momentum
+    universe: csi300
+    formula: delta(sub(div(close, delay(close, 20)), 1), 20)
+    expr:
+      op: delta
+      args:
+      - op: sub
+        args:
+        - op: div
+          args:
+          - var: close
+          - op: delay
+            args:
+            - var: close
+            - const: 20
+        - const: 1
+      - const: 20
+    hypothesis: 20日动量环比增长为正表示上涨趋势正在加速，动能增强，动量增速越高的股票未来收益越好
+    forward_days: 5
+    metrics:
+      mode: cs
+      ic_stats:
+        ic_mean: -0.676056
+        ic_std: 0.130513
+        icir: -5.18
+        ic_pos_ratio: 0.0
+        valid_days: 35
+      gate1_passed: true
+      gate1_detail:
+        ic_mean: -0.676056
+        icir: -5.18
+        threshold_ic_mean: 0.02
+        threshold_icir: 0.25
+      gate2_passed: false
+      gate2_detail:
+        max_corr: 0.9217
+        corr_with: mom_20
+        threshold: 0.7
+        skipped: false
+      gate3_passed: true
+      gate3_detail:
+        ic_is_mean: -0.674551
+        ic_oos_mean: -0.679339
+        threshold_oos: 0.01
+      gate4_passed: true
+      gate4_note: ok
+      status: rejected
+      reject_reason: 与库内因子相关过高
+    reject_reason: 与库内因子相关过高
+    builtin: false
+    created_at: '2026-08-25T11:40:32Z'
+    updated_at: '2026-08-25T11:40:33Z'
+  synth_a_mom:
+    id: synth_a_mom
+    name: A
+    origin: manual
+    status: rejected
+    theme: []
+    universe: csi300
+    formula: sub(div(close, delay(close, 5)), 1)
+    expr:
+      op: sub
+      args:
+      - op: div
+        args:
+        - var: close
+        - op: delay
+          args:
+          - var: close
+          - const: 5
+      - const: 1
+    hypothesis: 短期动量用于合成测试。
+    forward_days: 5
+    metrics:
+      mode: cs
+      ic_stats:
+        ic_mean: -0.553028
+        ic_std: 0.237005
+        icir: -2.3334
+        ic_pos_ratio: 0.0
+        valid_days: 90
+      gate1_passed: true
+      gate1_detail:
+        ic_mean: -0.553028
+        icir: -2.3334
+        threshold_ic_mean: 0.02
+        threshold_icir: 0.25
+      gate2_passed: false
+      gate2_detail:
+        max_corr: 0.9998
+        corr_with: mom_5
+        threshold: 0.7
+        skipped: false
+      gate3_passed: true
+      gate3_detail:
+        ic_is_mean: -0.54909
+        ic_oos_mean: -0.561749
+        threshold_oos: 0.01
+      gate4_passed: true
+      gate4_note: ok
+      status: rejected
+      reject_reason: 与库内因子相关过高
+    reject_reason: 与库内因子相关过高
+    builtin: false
+    created_at: '2026-08-25T11:04:05Z'
+    updated_at: '2026-08-25T11:04:06Z'
+  synth_b_rev:
+    id: synth_b_rev
+    name: B
+    origin: manual
+    status: rejected
+    theme: []
+    universe: csi300
+    formula: sub(div(delay(close, 5), close), 1)
+    expr:
+      op: sub
+      args:
+      - op: div
+        args:
+        - op: delay
+          args:
+          - var: close
+          - const: 5
+        - var: close
+      - const: 1
+    hypothesis: 短期反转用于合成测试。
+    forward_days: 5
+    metrics:
+      mode: cs
+      ic_stats:
+        ic_mean: 0.552432
+        ic_std: 0.237031
+        icir: 2.3306
+        ic_pos_ratio: 1.0
+        valid_days: 90
+      gate1_passed: true
+      gate1_detail:
+        ic_mean: 0.552432
+        icir: 2.3306
+        threshold_ic_mean: 0.02
+        threshold_icir: 0.25
+      gate2_passed: false
+      gate2_detail:
+        max_corr: 0.9998
+        corr_with: rev_5
+        threshold: 0.7
+        skipped: false
+      gate3_passed: true
+      gate3_detail:
+        ic_is_mean: 0.548049
+        ic_oos_mean: 0.562136
+        threshold_oos: 0.01
+      gate4_passed: true
+      gate4_note: ok
+      status: rejected
+      reject_reason: 与库内因子相关过高
+    reject_reason: 与库内因子相关过高
+    builtin: false
+    created_at: '2026-08-25T11:04:05Z'
+    updated_at: '2026-08-25T11:04:06Z'

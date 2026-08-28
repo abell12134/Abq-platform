@@ -1,0 +1,133 @@
+.scrLib {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.scrGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1rem;
+}
+
+.scrPanel {
+  border: 1px solid var(--border, #2a2a2e);
+  border-radius: 10px;
+  padding: 1rem;
+  background: var(--surface, #16161a);
+}
+
+.scrPanel h3,
+.scrPanel h4 {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+}
+
+.scrRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.scrRow label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.8rem;
+  min-width: 120px;
+}
+
+.scrRow select,
+.scrRow input[type="number"] {
+  padding: 0.35rem 0.5rem;
+  border-radius: 6px;
+  border: 1px solid var(--border, #2a2a2e);
+  background: var(--bg, #0f0f12);
+  color: inherit;
+}
+
+.scrCheck {
+  flex-direction: row !important;
+  align-items: center;
+  gap: 0.5rem !important;
+  align-self: flex-end;
+}
+
+.scrFactors {
+  margin: 0.75rem 0 1rem;
+  max-height: 220px;
+  overflow: auto;
+  border: 1px solid var(--border, #2a2a2e);
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+
+.scrFactorsHead {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.scrFactorsHead button {
+  font-size: 0.75rem;
+  padding: 0.15rem 0.4rem;
+}
+
+.scrFactorList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.scrFactorList li label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  padding: 0.2rem 0;
+}
+
+.scrFactorName {
+  font-weight: 500;
+}
+
+.scrFactorMeta {
+  opacity: 0.55;
+  font-size: 0.75rem;
+}
+
+.scrMeta {
+  font-size: 0.8rem;
+  opacity: 0.75;
+  margin: 0 0 0.75rem;
+}
+
+.scrTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.scrTable th,
+.scrTable td {
+  text-align: left;
+  padding: 0.35rem 0.5rem;
+  border-bottom: 1px solid var(--border, #2a2a2e);
+}
+
+.scrApply {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border, #2a2a2e);
+}
+
+.scrOk {
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  background: rgba(46, 160, 67, 0.15);
+  color: #3fb950;
+  font-size: 0.85rem;
+}

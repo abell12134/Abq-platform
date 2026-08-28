@@ -1,0 +1,162 @@
+.ticketPanelTab {
+  position: absolute;
+  right: 0;
+  top: 40%;
+  transform: translateY(-50%);
+  z-index: 3;
+  writing-mode: vertical-rl;
+  letter-spacing: 0.1em;
+  padding: 10px 6px;
+  border: 1px solid var(--line);
+  border-right: 0;
+  border-radius: 8px 0 0 8px;
+  background: var(--bg-2);
+  color: var(--muted);
+  font-size: 11px;
+  cursor: pointer;
+  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+}
+
+.ticketPanelTab:hover {
+  color: var(--accent);
+  border-color: var(--accent-line);
+}
+
+.ticketPanel {
+  width: var(--ticket-panel-width);
+  flex-shrink: 0;
+  border-left: 1px solid var(--line);
+  background: rgba(12, 16, 22, 0.94);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.ticketPanelHd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--line);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--faint);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: var(--mono);
+  flex-shrink: 0;
+  background: rgba(7, 9, 13, 0.92);
+}
+
+.ticketPanelClose {
+  background: transparent;
+  border: 0;
+  color: var(--faint);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.ticketPanelClose:hover {
+  color: var(--text);
+  background: var(--bg-3);
+}
+
+.ticketPanelScroll {
+  flex: 1;
+  overflow: auto;
+  min-height: 0;
+  padding: 14px 16px 18px;
+}
+
+.ticketPanelEmpty {
+  padding: 20px 4px;
+}
+
+.ticketInsightBody.compact .ticketHero {
+  margin-bottom: 10px;
+  padding: 12px 14px;
+}
+
+.ticketInsightBody.compact .ticketName {
+  font-size: 18px;
+}
+
+.ticketInsightBody.compact .ticketPrice {
+  font-size: 24px;
+}
+
+.ticketInsightBody.compact .ticketOhlc {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.ticketInsightBody.compact .ticketOhlc > div {
+  padding: 6px 8px;
+}
+
+.ticketInsightBody.compact .ticketOhlc b {
+  font-size: 11px;
+}
+
+.ticketInsightBody.compact .ticketGrid {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.ticketInsightBody.compact .ticketStat {
+  padding: 8px;
+  font-size: 12px;
+}
+
+.ticketInsightBody.compact .ticketSection {
+  margin-bottom: 12px;
+}
+
+.ticketInsightBody.compact .ticketSection h2 {
+  font-size: 11px;
+  margin-bottom: 6px;
+  color: var(--faint);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ticketInsightBody.compact .ticketViewCard {
+  padding: 10px 12px;
+  font-size: 13px;
+}
+
+.ticketInsightBody.compact .ticketViewCard .md {
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.ticketInsightBody.compact .ticketJudge .md {
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.chatLayout {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  height: 100%;
+}
+
+.chatColumn {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+}
+
+.chatLayout.hasPanel.panelOpen .chatColumn {
+  border-right: none;
+}

@@ -1,0 +1,19 @@
+id: supervisor
+name: 分析助手
+model_tier: primary
+tools:
+  - start_factor_mine_llm
+  - start_factor_mine_gp
+  - get_factor_mine_status
+  - run_factor_screen
+  - apply_screen_to_portfolio
+  - list_portfolios
+  - update_portfolio
+  - cancel_analysis
+  - list_factors
+  - search_prior_analysis
+  - get_knowledge_delta
+  - search_knowledge
+  - ingest_policy_text
+  - search_episodes
+prompt_id: supervisor-instructions

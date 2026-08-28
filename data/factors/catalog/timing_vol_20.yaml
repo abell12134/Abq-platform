@@ -1,0 +1,53 @@
+id: timing_vol_20
+name: 大盘20日波动（择时）
+origin: catalog
+status: passed_auto
+theme:
+- market
+- volatility
+universe: market
+formula: ts_std(sub(div(mkt_close, delay(mkt_close, 1)), 1), 20)
+expr:
+  op: ts_std
+  args:
+  - op: sub
+    args:
+    - op: div
+      args:
+      - var: mkt_close
+      - op: delay
+        args:
+        - var: mkt_close
+        - const: 1
+    - const: 1
+  - const: 20
+hypothesis: 市场已实现波动升高时风险偏好下降，用于择时。
+forward_days: 5
+metrics:
+  mode: timing
+  ic_stats:
+    ic_mean: 0.677458
+    ic_std: null
+    icir: null
+    ic_pos_ratio: null
+    valid_days: 55
+  gate1_passed: true
+  gate1_detail:
+    ic_mean: 0.677458
+    threshold_ic_mean: 0.05
+  gate2_passed: true
+  gate2_detail:
+    skipped: true
+  gate3_passed: true
+  gate3_detail:
+    ic_is_mean: 0.666485
+    ic_oos_mean: 0.653162
+    threshold_oos: 0.01
+  gate4_passed: true
+  gate4_note: ok
+  status: passed_auto
+  reject_reason: 过自动关卡
+reject_reason: 过自动关卡
+builtin: true
+created_at: '2026-08-25T08:02:00Z'
+updated_at: '2026-08-25T09:15:30Z'

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ABQ Lab</title>
+  <style>
+    :root {
+      --bg: #0a0c10; --bg-2: #10131a; --bg-3: #161b24; --bg-4: #1c2230;
+      --line: #262c38; --line-2: #3a4254;
+      --text: #e7edf6; --muted: #8a94a8; --faint: #5b6578;
+      --accent: #e8913a; --accent-dim: rgba(232,145,58,.12); --accent-line: rgba(232,145,58,.35);
+      --ok: #4eae86; --run: #d0a441;
+      --user: #8b9bb4; --asst: #c4b5f0; --tool: #d4a574; --agent: #7eb6ff; --comp: #5ec49a;
+      --font: "IBM Plex Sans", "PingFang SC", sans-serif;
+      --mono: "IBM Plex Mono", ui-monospace, monospace;
+      --sidebar: 248px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body, .app { height: 100%; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); font-size: 13px; overflow: hidden; }
+    button, textarea, input { font-family: inherit; color: inherit; }
+    button { cursor: pointer; }
+    .app { display: grid; grid-template-columns: var(--sidebar) 1fr; }
+    .shell { display: flex; flex-direction: column; border-right: 1px solid var(--line); background: var(--bg-2); min-height: 0; }
+    .brand { display: flex; align-items: center; gap: 10px; padding: 14px 16px 12px; font-weight: 600; font-size: 14px; }
+    .brand i { width: 28px; height: 28px; border-radius: 8px; background: var(--accent-dim); border: 1px solid var(--accent-line); display: grid; place-items: center; color: var(--accent); font-style: normal; font-family: var(--mono); font-size: 11px; }
+    .nav { padding: 0 8px; display: flex; flex-direction: column; gap: 2px; }
+    .nav button {
+      display: flex; align-items: center; gap: 10px; width: 100%; text-align: left;
+      background: 0; border: 0; border-radius: 8px; padding: 8px 10px; color: var(--muted); font-size: 13px;
+    }
+    .nav button:hover { background: var(--bg-3); color: var(--text); }
+    .nav button.active { background: var(--accent-dim); color: var(--accent); }
+    .nav button .ico { width: 18px; text-align: center; opacity: .85; }
+    .sess-head { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px 6px; }
+    .sess-head span { font-size: 11px; letter-spacing: .08em; color: var(--faint); text-transform: uppercase; }
+    .sess-head button { background: 0; border: 0; color: var(--muted); font-size: 18px; line-height: 1; padding: 0 4px; }
+    .sess-list { flex: 1; overflow: auto; padding: 0 8px 8px; min-height: 0; }
+    .sess {
+      width: 100%; text-align: left; background: 0; border: 0; border-radius: 8px;
+      padding: 8px 10px 8px 26px; position: relative; color: var(--muted);
+    }
+    .sess:hover { background: var(--bg-3); color: var(--text); }
+    .sess.active { background: var(--bg-3); color: var(--text); }
+    .sess .dot { position: absolute; left: 10px; top: 13px; width: 7px; height: 7px; border-radius: 50%; }
+    .sess .dot.ok { background: var(--ok); }
+    .sess .dot.run { background: var(--run); box-shadow: 0 0 0 2px rgba(208,164,65,.25); animation: pulse 1.4s infinite; }
+    @keyframes pulse { 50% { opacity: .45; } }
+    .sess b { display: block; font-weight: 500; font-size: 12.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .sess small { display: block; color: var(--faint); font-size: 11px; margin-top: 2px; }
+    .shell-ft { padding: 10px 14px; border-top: 1px solid var(--line); color: var(--faint); font-size: 11px; }
+    .main { display: grid; grid-template-rows: 44px 1fr; min-width: 0; min-height: 0; position: relative; }
+    .top {
+      display: flex; align-items: center; gap: 10px; padding: 0 16px;
+      border-bottom: 1px solid var(--line); background: var(--bg);
+    }
+    .sess-title { font-size: 13px; font-weight: 500; }
+    .mode { color: var(--faint); font-size: 12px; }
+    .top-r { margin-left: auto; display: flex; gap: 10px; align-items: center; color: var(--muted); font-size: 12px; }
+    .logbtn { background: 0; border: 1px solid var(--line); border-radius: 6px; padding: 4px 8px; color: var(--muted); }
+    .llm-pill { font-size: 11px; border: 1px solid var(--line); border-radius: 99px; padding: 2px 8px; color: var(--muted); }
+    .llm-pill.ok { border-color: #2c5a48; color: var(--ok); }
+    .stage { position: relative; min-height: 0; overflow: hidden; }
+    .page { display: none; height: 100%; min-height: 0; }
+    .page.show { display: flex; flex-direction: column; }
+    .thread { flex: 1; display: flex; flex-direction: column; min-height: 0; background: var(--bg-2); padding-bottom: 132px; overflow: auto; }
+    .hero { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px 32px 40px; text-align: center; max-width: 820px; margin: 0 auto; }
+    .hero h1 { font-size: 28px; font-weight: 600; line-height: 1.25; margin-bottom: 10px; }
+    .hero .sub { color: var(--muted); font-size: 14px; line-height: 1.6; max-width: 520px; }
+    .cta {
+      margin-top: 22px; background: var(--accent); color: #1a1208; border: 0; border-radius: 10px;
+      padding: 11px 22px; font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .cta:hover { filter: brightness(1.06); }
+    .feats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; width: 100%; margin-top: 36px; text-align: left; }
+    .feat { background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+    .feat .ico { color: var(--accent); font-size: 18px; margin-bottom: 8px; }
+    .feat h3 { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+    .feat p { color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .quick { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 28px; }
+    .chip-q {
+      background: var(--bg); border: 1px solid var(--line); border-radius: 99px; padding: 7px 14px;
+      color: var(--muted); font-size: 12px;
+    }
+    .chip-q:hover, .chip-q.on { border-color: var(--accent-line); background: var(--accent-dim); color: var(--accent); }
+    .browse { margin-top: 16px; background: 0; border: 0; color: var(--faint); font-size: 12px; display: inline-flex; gap: 4px; align-items: center; }
+    .browse.open { color: var(--text); }
+    .examples { width: 100%; margin-top: 12px; overflow: hidden; max-height: 0; opacity: 0; transition: max-height .3s, opacity .25s; }
+    .examples.open { max-height: 280px; opacity: 1; }
+    .ex-tabs { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-bottom: 10px; }
+    .ex-tab { background: 0; border: 1px solid transparent; border-radius: 99px; padding: 5px 10px; color: var(--faint); font-size: 11px; }
+    .ex-tab.on { border-color: var(--accent-line); background: var(--accent-dim); color: var(--accent); }
+    .ex-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; text-align: left; }
+    .ex-card { background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; text-align: left; }
+    .ex-card:hover { border-color: var(--accent-line); }
+    .ex-card b { display: block; font-size: 12px; margin-bottom: 3px; }
+    .ex-card span { color: var(--faint); font-size: 11px; line-height: 1.4; }
+    .msgs { flex: 1; overflow: auto; padding: 22px 0 8px; display: flex; flex-direction: column; gap: 16px; }
+    .col { width: min(720px, calc(100% - 48px)); margin: 0 auto; }
+    .who { font-size: 11px; color: var(--faint); margin: 0 0 6px 2px; }
+    .bubble { background: var(--bg-3); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; line-height: 1.55; }
+    .pcard { background: var(--bg); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+    .pcard.live { border-color: #4a3d18; }
+    .phd { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-bottom: 1px solid var(--line); background: var(--bg-3); font-size: 12px; }
+    .kind { font-family: var(--mono); font-size: 10px; color: var(--accent); border: 1px solid var(--accent-line); border-radius: 4px; padding: 1px 5px; }
+    .pid { font-family: var(--mono); }
+    .phd .sp { margin-left: auto; color: var(--faint); font-size: 11px; }
+    .st { font-size: 10px; border: 1px solid var(--line); border-radius: 99px; padding: 1px 7px; color: var(--muted); }
+    .st.ok { color: var(--ok); border-color: #2c5a48; }
+    .st.run { color: var(--run); border-color: #5a4a1c; }
+    .pbd { padding: 10px 12px; color: var(--muted); font-size: 12.5px; }
+    .kv { font-family: var(--mono); font-size: 11px; color: var(--faint); margin-top: 8px; }
+    .dock {
+      position: absolute; left: 0; right: 0; bottom: 0; padding: 0 0 14px;
+      background: linear-gradient(180deg, transparent, var(--bg-2) 36%);
+      pointer-events: none;
+    }
+    .composer { pointer-events: auto; width: min(720px, calc(100% - 48px)); margin: 0 auto; background: var(--bg); border: 1px solid var(--line-2); border-radius: 16px; padding: 8px 10px 10px; }
+    .mounts { display: flex; flex-wrap: wrap; gap: 6px; padding: 2px 4px 8px; }
+    .chip { display: inline-flex; align-items: center; gap: 6px; background: var(--bg-3); border: 1px solid var(--line); border-radius: 99px; padding: 3px 8px; font-size: 11px; color: var(--muted); }
+    .chip b { font-weight: 500; color: var(--text); }
+    .chip .x { color: var(--faint); border: 0; background: 0; padding: 0; }
+    .chip.on { border-color: var(--accent-line); color: var(--accent); }
+    textarea { width: 100%; height: 44px; resize: none; border: 0; background: 0; outline: 0; font-size: 14px; padding: 4px; }
+    .cbar { display: flex; align-items: center; gap: 8px; }
+    .plus, .dd { background: var(--bg-3); border: 1px solid var(--line); border-radius: 8px; padding: 5px 9px; color: var(--muted); font-size: 12px; }
+    .muted-dd { opacity: .65; cursor: default; }
+    .menu { display: none; position: absolute; bottom: 36px; left: 0; width: 280px; background: var(--bg-2); border: 1px solid var(--line-2); border-radius: 10px; padding: 8px; z-index: 5; }
+    .menu.open { display: block; }
+    .mi { width: 100%; text-align: left; background: 0; border: 0; padding: 7px 8px; border-radius: 6px; display: flex; justify-content: space-between; }
+    .mi:hover { background: var(--bg-3); }
+    .mi small { color: var(--faint); }
+    .send { margin-left: auto; background: var(--accent); color: #1a1208; border: 0; width: 32px; height: 32px; border-radius: 50%; font-weight: 700; }
+    .metrics { width: min(720px, calc(100% - 48px)); margin: 6px auto 0; color: var(--faint); font-size: 11px; pointer-events: none; }
+    .tb { display: flex; align-items: center; gap: 14px; padding: 8px 16px; border-bottom: 1px solid var(--line); font-size: 12px; color: var(--muted); flex-shrink: 0; }
+    .tb label { display: flex; gap: 6px; align-items: center; }
+    .tb input[type=search] { background: var(--bg-3); border: 1px solid var(--line); border-radius: 6px; padding: 4px 8px; margin-left: auto; width: 180px; }
+    .tlwrap { padding: 8px 16px 10px; border-bottom: 1px solid var(--line); flex-shrink: 0; }
+    .tlrow { display: grid; grid-template-columns: 52px 1fr; gap: 8px; align-items: center; margin: 3px 0; }
+    .tlrow span { font-size: 10px; color: var(--faint); }
+    .tl { display: flex; height: 10px; gap: 1px; }
+    .tl i { flex: 1; min-width: 3px; border-radius: 1px; }
+    .ledger { flex: 1; overflow: auto; padding: 8px 16px 140px; }
+    .erow { display: grid; grid-template-columns: 92px 1fr; gap: 12px; padding: 7px 8px; border-radius: 4px; }
+    .erow:hover, .erow.on { background: #1a1f2a; }
+    .role { font-size: 11px; font-weight: 700; letter-spacing: .04em; }
+    .r-user { color: var(--user); } .r-asst { color: var(--asst); } .r-tool { color: var(--tool); }
+    .r-agent { color: var(--agent); } .r-comp { color: var(--comp); }
+    .ebody { font-size: 12.5px; line-height: 1.45; color: #c5cddb; }
+    .ebody code { font-family: var(--mono); font-size: 11px; color: var(--tool); }
+    .ctx { overflow: auto; padding: 14px 16px 140px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+    .kpi { display: grid; grid-template-columns: repeat(6, 1fr) 200px; gap: 8px; }
+    .card { background: var(--bg-2); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
+    .card b { display: block; font-size: 20px; font-family: var(--mono); }
+    .card em { font-style: normal; color: var(--faint); font-size: 11px; }
+    .plugcard .pid { color: var(--accent); }
+    .split { display: grid; grid-template-columns: 1.2fr .8fr; gap: 10px; }
+    .split3 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .seg { height: 12px; display: flex; border-radius: 4px; overflow: hidden; background: #1b2230; margin: 8px 0; }
+    .seg i { display: block; height: 100%; }
+    .legend { display: flex; flex-wrap: wrap; gap: 10px 14px; font-size: 11px; color: var(--muted); }
+    .legend u { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 5px; text-decoration: none; }
+    .hbars { display: flex; align-items: flex-end; gap: 8px; height: 88px; padding-top: 8px; }
+    .hbars .b { flex: 1; background: #3d4a63; border-radius: 2px 2px 0 0; position: relative; }
+    .hbars .b span { position: absolute; top: -14px; left: 0; right: 0; text-align: center; font-size: 10px; color: var(--faint); }
+    .br { display: flex; justify-content: space-between; font-size: 12px; padding: 5px 0; border-bottom: 1px solid var(--line); color: var(--muted); }
+    .ev { font-size: 12px; padding: 6px 0; border-bottom: 1px solid var(--line); color: #c5cddb; }
+    .ev time { color: var(--faint); font-family: var(--mono); font-size: 11px; margin-right: 8px; }
+    .pad { padding: 22px 28px 140px; overflow: auto; flex: 1; }
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .lib { background: var(--bg-2); border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
+    .lib .row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    h1 { font-size: 18px; font-weight: 600; }
+    .sub { color: var(--muted); margin: 6px 0 16px; }
+    .mount-side { padding: 8px 16px 12px; border-top: 1px solid var(--line); }
+    .mount-side .sec { font-size: 10px; letter-spacing: .1em; color: var(--faint); margin-bottom: 6px; }
+    .plug { display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: 12px; padding: 4px 0; }
+    .plug code { font-family: var(--mono); font-size: 10px; color: var(--accent); }
+    .plug.off { opacity: .4; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="shell">
+      <div class="brand"><i>abq</i> ABQ Lab</div>
+      <nav class="nav" id="nav">
+        <button class="active" data-page="chat"><span class="ico">◉</span>对话</button>
+        <button data-page="workflow"><span class="ico">≡</span>工作流</button>
+        <button data-page="ctx"><span class="ico">◫</span>上下文</button>
+        <button data-page="lib"><span class="ico">▣</span>agent库</button>
+      </nav>
+      <div class="sess-head">
+        <span>Sessions</span>
+        <button type="button" id="new-chat" title="新对话">+</button>
+      </div>
+      <div class="sess-list">
+        <button class="sess active" data-sid="maotai"><span class="dot run"></span><b>贵州茅台怎么看</b><small>刚才 · 4 个能力已挂</small></button>
+        <button class="sess" data-sid="market"><span class="dot ok"></span><b>今日大盘侧重新能源</b><small>上午 · 已完成</small></button>
+        <button class="sess" data-sid="pf"><span class="dot ok"></span><b>组合A 观察</b><small>昨天</small></button>
+      </div>
+      <div class="mount-side">
+        <div class="sec">本会话已挂载</div>
+        <div id="side-plugs"></div>
+      </div>
+      <div class="shell-ft">v0 · A股/ETF 分析工作台</div>
+    </aside>
+
+    <div class="main">
+      <header class="top">
+        <div class="sess-title" id="top-title">新对话</div>
+        <div class="mode" id="top-mode">单票 · A股</div>
+        <div class="top-r">
+          <button class="logbtn" type="button">Session log ↓</button>
+          <span class="llm-pill" title="主模型 API">主 · Minimax</span>
+          <span class="llm-pill ok" title="本地小模型">本地 · nemotron ✓</span>
+        </div>
+      </header>
+
+      <div class="stage">
+        <section class="page show" id="page-chat">
+          <div class="thread">
+            <div class="hero" id="hero">
+              <h1>用自然语言发起 A股/ETF 分析</h1>
+              <p class="sub">描述你想看的票、板块或组合。平台用 LLM 编排取数、清洗、多 agent 研判，全过程可回放、可压缩。</p>
+              <button class="cta" id="cta" type="button">开始分析 →</button>
+              <div class="feats">
+                <div class="feat"><div class="ico">◎</div><h3>LLM 编排</h3><p>大盘 / 单票 / 选组是对话里的分析种类，不是顶栏菜单。</p></div>
+                <div class="feat"><div class="ico">▣</div><h3>agent库挂载</h3><p>agent、提示词、因子从 agent库挂到 composer，像插件一样装卸。</p></div>
+                <div class="feat"><div class="ico">⚡</div><h3>流式过程</h3><p>工具与 agent 以卡片长在对话里；工作流页看完整账本。</p></div>
+              </div>
+              <div class="quick" id="quick"></div>
+              <button class="browse" id="browse" type="button">按场景浏览示例 ▾</button>
+              <div class="examples" id="examples">
+                <div class="ex-tabs" id="ex-tabs"></div>
+                <div class="ex-grid" id="ex-grid"></div>
+              </div>
+            </div>
+            <div class="msgs" id="msgs" hidden></div>
+          </div>
+        </section>
+
+        <section class="page" id="page-workflow">
+          <div class="tb">
+            <label><input type="checkbox" checked> Duration</label>
+            <label><input type="checkbox" checked> Turns</label>
+            <label><input type="checkbox" checked> Calls</label>
+            <input type="search" placeholder="搜索工作流">
+          </div>
+          <div class="tlwrap">
+            <div class="tlrow"><span>user</span><div class="tl" id="tl-user"></div></div>
+            <div class="tlrow"><span>asst</span><div class="tl" id="tl-asst"></div></div>
+            <div class="tlrow"><span>tools</span><div class="tl" id="tl-tools"></div></div>
+          </div>
+          <div class="ledger" id="ledger"></div>
+        </section>
+
+        <section class="page" id="page-ctx">
+          <div class="ctx">
+            <div class="kpi">
+              <div class="card"><em>轮次</em><b>2</b></div>
+              <div class="card"><em>步骤</em><b>7</b></div>
+              <div class="card"><em>注入</em><b>1</b></div>
+              <div class="card"><em>压缩</em><b>1</b></div>
+              <div class="card"><em>剪枝</em><b>0</b></div>
+              <div class="card"><em>缓存命中</em><b>62%</b></div>
+              <div class="card plugcard"><em>压缩引擎</em><div class="pid">plugin.compaction</div><div style="color:var(--faint);margin-top:4px">阈值 60% · 本 path 触发 1 次</div></div>
+            </div>
+            <div class="split">
+              <div class="card">
+                <em>当前构成</em>
+                <div style="margin:6px 0 2px;font-family:var(--mono)">3.1k / 128k tokens · 2.4%</div>
+                <div class="seg">
+                  <i style="width:18%;background:#5b6a8a"></i><i style="width:16%;background:#4eae86"></i>
+                  <i style="width:14%;background:#c4b5f0"></i><i style="width:22%;background:#7eb6ff"></i>
+                  <i style="width:20%;background:#d4a574"></i><i style="width:10%;background:#5c6678"></i>
+                </div>
+                <div class="legend">
+                  <span><u style="background:#5b6a8a"></u>System 0.9k</span>
+                  <span><u style="background:#4eae86"></u>Tools 0.7k</span>
+                  <span><u style="background:#c4b5f0"></u>User 0.4k</span>
+                  <span><u style="background:#7eb6ff"></u>Findings 0.8k</span>
+                  <span><u style="background:#d4a574"></u>Tool results 0.6k</span>
+                </div>
+              </div>
+              <div class="card">
+                <em>上下文浏览器 · 下一请求</em>
+                <div class="br"><span>System prompts</span><span>1 · 0.9k</span></div>
+                <div class="br"><span>Tool definitions</span><span>4 · 0.7k</span></div>
+                <div class="br"><span>关键发现</span><span>2 · 0.8k</span></div>
+                <div class="br" style="color:var(--text)"><span>合计</span><span>3.1k</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="page" id="page-lib">
+          <div class="pad">
+            <h1>agent库 · 可挂载插件</h1>
+            <p class="sub">挂到对话 = 写入本轮 composer，不是改平台内核。</p>
+            <div class="grid" id="lib-grid"></div>
+          </div>
+        </section>
+
+        <div class="dock">
+          <div class="composer">
+            <div class="mounts" id="mounts"></div>
+            <textarea id="input" placeholder="描述你想分析的内容…"></textarea>
+            <div class="cbar">
+              <div id="plus-wrap" style="position:relative">
+                <button class="plus" id="plus" type="button">+ 挂载</button>
+                <div class="menu" id="menu"></div>
+              </div>
+              <button class="dd" type="button">A股 ▾</button>
+              <button class="dd" type="button">prompt · 综合研判-收口 ▾</button>
+              <button class="dd" type="button" title="仅主模型 tier">主模型 · Minimax ▾</button>
+            <button class="dd muted-dd" type="button" title="子 agent 抽取/压缩自动走本地">本地 · nemotron</button>
+              <button class="send" id="send" type="button">↑</button>
+            </div>
+          </div>
+          <div class="metrics">2 轮 · 7 步 · 压缩 1 次 · 缓存 62% · 3.1k / 128k</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const PLUGINS = [
+      { id: "agent.tech", kind: "agent", name: "技术面", tools: "ohlcv · indicator", on: true },
+      { id: "agent.fundamental", kind: "agent", name: "基本面", tools: "fundamentals", on: true },
+      { id: "agent.sentiment", kind: "agent", name: "舆情", tools: "sentiment", on: true },
+      { id: "prompt.judge", kind: "prompt", name: "综合研判-收口", tools: "{{symbol}} {{focus}}", on: true },
+    ];
+    const QUICK = [
+      { t: "单票 · 茅台量价", p: "看 600519，重点量价是否背离" },
+      { t: "大盘 · 新能源", p: "今日大盘，侧重新能源资金流" },
+      { t: "选组 · 集中度", p: "诊断组合A硬科技的集中度" },
+    ];
+    const CATS = [
+      { id: "single", label: "单票", items: [
+        { t: "量价背离", d: "600519 贵州茅台", p: "看 600519，重点量价是否背离" },
+        { t: "财报前研判", d: "等待年报前的证据链", p: "600519 财报季前，技术面+基本面能给什么结论" },
+      ]},
+      { id: "market", label: "大盘", items: [
+        { t: "板块侧重", d: "新能源资金流", p: "今日大盘，侧重新能源资金流" },
+        { t: "情绪温度计", d: "涨跌家数+量能", p: "今天市场情绪如何，量能是否配合" },
+      ]},
+      { id: "pf", label: "选组", items: [
+        { t: "集中度诊断", d: "组合A 硬科技", p: "诊断组合A硬科技的集中度" },
+        { t: "涨跌归因", d: "本周组合波动", p: "组合A 本周涨跌主要由哪几只贡献" },
+      ]},
+      { id: "agents", label: "多 agent", items: [
+        { t: "三视角并行", d: "tech+fund+舆情", p: "600519 三视角并行，最后 judge 收口" },
+        { t: "多空辩论", d: "bull vs bear", p: "对 300750 做多和做空各给一轮论据" },
+      ]},
+    ];
+    const EVENTS = [
+      { k: "user", role: "USER", t: "看 600519 贵州茅台，重点看量价是不是背离。" },
+      { k: "asst", role: "ASSISTANT", t: "单票标准链：fetch → clean → calc，然后技术面 / 基本面 / 舆情并行，judge 收口。" },
+      { k: "tool", role: "TOOL", t: 'fetch_ohlcv <code>{"symbol":"600519"}</code> → outputRef a3', llm: null },
+      { k: "agent", role: "AGENT", t: "agent.tech · 量价同向，近端结构未破中轴。", llm: "primary · minimax" },
+      { k: "comp", role: "COMPACT", t: "12.4k → 3.1k · 保留 keyFindings", llm: "local · nemotron" },
+      { k: "asst", role: "ASSISTANT", t: "等舆情完成后交给 prompt.judge 收口。" },
+    ];
+    const THREAD = `
+      <div class="col"><div class="who">你</div><div class="bubble">帮我看 600519 贵州茅台，重点看量价是不是背离。</div></div>
+      <div class="col"><div class="pcard"><div class="phd"><span class="kind">tool</span><span class="pid">fetch_ohlcv</span><span class="sp">a-share</span><span class="st ok">ok</span></div><div class="pbd">120 日 K 已落盘。<div class="kv">outputRef a3</div></div></div></div>
+      <div class="col"><div class="pcard"><div class="phd"><span class="kind">agent</span><span class="pid">tech</span><span class="st ok">完成</span></div><div class="pbd">量价同向，近端结构未破中轴。</div></div></div>
+      <div class="col"><div class="pcard live"><div class="phd"><span class="kind">agent</span><span class="pid">sentiment</span><span class="st run">进行中</span></div><div class="pbd">公告分层检索中。</div></div></div>`;
+
+    const hero = document.getElementById("hero");
+    const msgs = document.getElementById("msgs");
+    const input = document.getElementById("input");
+    const menu = document.getElementById("menu");
+    const C = { user: "var(--user)", asst: "var(--asst)", tool: "var(--tool)", agent: "var(--agent)", comp: "var(--comp)" };
+    let exCat = 0;
+
+    function paintTl(id, pred) {
+      document.getElementById(id).innerHTML = EVENTS.map(e =>
+        `<i style="background:${pred(e) ? C[e.k] : "#1b2230"}"></i>`).join("");
+    }
+    function paintLedger() {
+      document.getElementById("ledger").innerHTML = EVENTS.map((e, i) =>
+        `<div class="erow ${i === 2 ? "on" : ""}"><div class="role r-${e.k}">${e.role}${e.llm ? `<div style="font-size:10px;font-weight:400;color:var(--faint);margin-top:2px">${e.llm}</div>` : ""}</div><div class="ebody">${e.t}</div></div>`).join("");
+    }
+    function renderMounts() {
+      document.getElementById("mounts").innerHTML = PLUGINS.filter(p => p.on).map(p =>
+        `<span class="chip on"><code>${p.kind}</code><b>${p.name}</b><button class="x" data-off="${p.id}">×</button></span>`).join("") + `<span class="chip">realm <b>A股</b></span>`;
+      document.getElementById("side-plugs").innerHTML = PLUGINS.map(p =>
+        `<div class="plug ${p.on ? "" : "off"}"><span>${p.name}</span><code>${p.on ? "on" : "off"}</code></div>`).join("");
+      menu.innerHTML = PLUGINS.map(p =>
+        `<button class="mi" data-tog="${p.id}"><span>${p.name}</span><span>${p.on ? "卸下" : "挂上"}</span></button>`).join("");
+      document.getElementById("lib-grid").innerHTML = PLUGINS.map(p =>
+        `<div class="lib"><div class="row"><span class="kind">${p.kind}</span><span class="st ${p.on ? "ok" : ""}">${p.on ? "已挂" : "agent库"}</span></div>
+         <div class="pid">${p.id}</div><div style="margin:8px 0">${p.name}</div>
+         <button class="dd" data-tog="${p.id}">${p.on ? "卸下" : "挂到对话"}</button></div>`).join("");
+    }
+    function renderExamples() {
+      document.getElementById("quick").innerHTML = QUICK.map((q, i) =>
+        `<button class="chip-q ${i === 0 ? "on" : ""}" data-fill="${q.p}">${q.t}</button>`).join("");
+      document.getElementById("ex-tabs").innerHTML = CATS.map((c, i) =>
+        `<button class="ex-tab ${i === exCat ? "on" : ""}" data-cat="${i}">${c.label}</button>`).join("");
+      document.getElementById("ex-grid").innerHTML = CATS[exCat].items.map(x =>
+        `<button class="ex-card" data-fill="${x.p}"><b>${x.t}</b><span>${x.d}</span></button>`).join("");
+    }
+    function toggle(id) { const p = PLUGINS.find(x => x.id === id); if (p) p.on = !p.on; renderMounts(); }
+    function showThread(on) {
+      hero.style.display = on ? "none" : "flex";
+      msgs.hidden = !on;
+      msgs.innerHTML = on ? THREAD : "";
+      document.getElementById("top-title").textContent = on ? "贵州茅台怎么看" : "新对话";
+    }
+    function showPage(id) {
+      document.querySelectorAll(".nav button").forEach(x => x.classList.toggle("active", x.dataset.page === id));
+      document.querySelectorAll(".page").forEach(p => p.classList.toggle("show", p.id === "page-" + id));
+    }
+    function startChat() {
+      showThread(true); showPage("chat");
+      document.querySelector(".sess").classList.add("active");
+      input.focus();
+    }
+
+    document.getElementById("nav").onclick = (e) => {
+      const b = e.target.closest("button[data-page]");
+      if (b) showPage(b.dataset.page);
+    };
+    document.getElementById("new-chat").onclick = () => {
+      document.querySelectorAll(".sess").forEach(s => s.classList.remove("active"));
+      showThread(false); showPage("chat"); input.value = ""; input.focus();
+    };
+    document.querySelectorAll(".sess").forEach(s => s.onclick = () => {
+      document.querySelectorAll(".sess").forEach(x => x.classList.remove("active"));
+      s.classList.add("active");
+      showThread(s.dataset.sid === "maotai"); showPage("chat");
+    });
+    document.getElementById("cta").onclick = startChat;
+    document.getElementById("browse").onclick = () => {
+      document.getElementById("examples").classList.toggle("open");
+      document.getElementById("browse").classList.toggle("open");
+    };
+    document.getElementById("plus").onclick = (e) => { e.stopPropagation(); menu.classList.toggle("open"); };
+    document.body.onclick = () => menu.classList.remove("open");
+    document.addEventListener("click", (e) => {
+      const fill = e.target.closest("[data-fill]");
+      if (fill) { input.value = fill.dataset.fill; input.focus(); return; }
+      const cat = e.target.closest("[data-cat]");
+      if (cat) { exCat = +cat.dataset.cat; renderExamples(); return; }
+      const t = e.target.closest("[data-tog], [data-off]");
+      if (!t) return;
+      e.stopPropagation();
+      toggle(t.dataset.tog || t.dataset.off);
+    });
+    document.getElementById("send").onclick = () => { startChat(); input.value = ""; };
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); document.getElementById("send").click(); }
+    });
+
+    paintTl("tl-user", e => e.k === "user");
+    paintTl("tl-asst", e => e.k === "asst" || e.k === "comp");
+    paintTl("tl-tools", e => e.k === "tool" || e.k === "agent");
+    paintLedger(); renderMounts(); renderExamples();
+    const h = (location.hash || "#chat").slice(1);
+    if (h === "live") { showThread(true); document.querySelector(".sess").classList.add("active"); }
+    else if (["workflow", "ctx", "lib"].includes(h)) { showThread(true); showPage(h); document.querySelector(".sess").classList.add("active"); }
+    else showThread(false);
+  </script>
+</body>
+</html>

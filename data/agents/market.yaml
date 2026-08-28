@@ -1,0 +1,15 @@
+id: market
+name: 大盘研判
+model_tier: primary
+tools:
+  - list_factors
+  - compute_factor
+  - factor_analysis
+  - fetch_market_breadth
+  - fetch_sector_pulse
+  - get_knowledge_delta
+  - search_knowledge
+  - start_factor_mine_llm
+  - start_factor_mine_gp
+  - get_factor_mine_status
+prompt_id: market-instructions

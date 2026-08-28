@@ -1,0 +1,50 @@
+id: timing_mom_20
+name: 大盘20日动量（择时）
+origin: catalog
+status: passed_auto
+theme:
+- market
+- momentum
+universe: market
+formula: sub(div(mkt_close, delay(mkt_close, 20)), 1)
+expr:
+  op: sub
+  args:
+  - op: div
+    args:
+    - var: mkt_close
+    - op: delay
+      args:
+      - var: mkt_close
+      - const: 20
+  - const: 1
+hypothesis: 指数自身中期动量，用于大盘择时而非选股。
+forward_days: 5
+metrics:
+  mode: timing
+  ic_stats:
+    ic_mean: -0.498274
+    ic_std: null
+    icir: null
+    ic_pos_ratio: null
+    valid_days: 55
+  gate1_passed: true
+  gate1_detail:
+    ic_mean: -0.498274
+    threshold_ic_mean: 0.05
+  gate2_passed: true
+  gate2_detail:
+    skipped: true
+  gate3_passed: true
+  gate3_detail:
+    ic_is_mean: -0.506175
+    ic_oos_mean: -0.500308
+    threshold_oos: 0.01
+  gate4_passed: true
+  gate4_note: ok
+  status: passed_auto
+  reject_reason: 过自动关卡
+reject_reason: 过自动关卡
+builtin: true
+created_at: '2026-08-25T08:02:00Z'
+updated_at: '2026-08-25T09:15:33Z'

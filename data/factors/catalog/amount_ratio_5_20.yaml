@@ -1,0 +1,54 @@
+id: amount_ratio_5_20
+name: 额比5/20
+origin: catalog
+status: passed_auto
+theme:
+- volume
+universe: csi300
+formula: div(ts_mean(amount, 5), ts_mean(amount, 20))
+expr:
+  op: div
+  args:
+  - op: ts_mean
+    args:
+    - var: amount
+    - const: 5
+  - op: ts_mean
+    args:
+    - var: amount
+    - const: 20
+hypothesis: 成交额比成交量更能反映资金力度。
+forward_days: 5
+metrics:
+  mode: cs
+  ic_stats:
+    ic_mean: -0.6283
+    ic_std: 0.156999
+    icir: -4.0019
+    ic_pos_ratio: 0.0
+    valid_days: 56
+  gate1_passed: true
+  gate1_detail:
+    ic_mean: -0.6283
+    icir: -4.0019
+    threshold_ic_mean: 0.02
+    threshold_icir: 0.25
+  gate2_passed: true
+  gate2_detail:
+    max_corr: 0.6143
+    corr_with: mom_60
+    threshold: 0.7
+    skipped: false
+  gate3_passed: true
+  gate3_detail:
+    ic_is_mean: -0.634933
+    ic_oos_mean: -0.613085
+    threshold_oos: 0.01
+  gate4_passed: true
+  gate4_note: ok
+  status: passed_auto
+  reject_reason: 过自动关卡
+reject_reason: 过自动关卡
+builtin: true
+created_at: '2026-08-25T08:02:00Z'
+updated_at: '2026-08-25T09:15:31Z'

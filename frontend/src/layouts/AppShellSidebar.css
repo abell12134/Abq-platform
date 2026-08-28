@@ -1,0 +1,102 @@
+.shell {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--line);
+  background: rgba(12, 16, 22, 0.92);
+  min-height: 0;
+  height: 100%;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 16px 14px;
+}
+
+.brand i {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius);
+  background: var(--accent-dim);
+  border: 1px solid var(--accent-line);
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+  font-style: normal;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: -0.06em;
+  flex-shrink: 0;
+}
+
+.brandText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 2px;
+}
+
+.brandText strong {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.brandSlash {
+  color: var(--accent);
+  font-family: var(--mono);
+  font-weight: 500;
+}
+
+.brandSub {
+  font-size: 10px;
+  font-family: var(--mono);
+  letter-spacing: var(--hud-track);
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.nav {
+  padding: 0 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nav button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius);
+  padding: 8px 10px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.nav button:hover {
+  background: var(--bg-3);
+  color: var(--text);
+}
+
+.nav button.active {
+  background: var(--accent-dim);
+  color: var(--accent);
+}
+
+.shellFt {
+  padding: 10px 14px;
+  border-top: 1px solid var(--line);
+  color: var(--faint);
+  font-size: 10px;
+  font-family: var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}

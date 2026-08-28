@@ -1,0 +1,11 @@
+.queryErr {
+  color: #e88;
+  background: rgba(200, 80, 80, 0.1);
+  border: 1px solid #633;
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-bottom: 12px;
+  font-size: 13px;
+  line-height: 1.4;
+  word-break: break-word;
+}

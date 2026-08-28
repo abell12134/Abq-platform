@@ -1,0 +1,54 @@
+id: ma_bias_20
+name: 20日均线偏离
+origin: catalog
+status: passed_auto
+theme:
+- momentum
+universe: csi300
+formula: sub(div(close, ts_mean(close, 20)), 1)
+expr:
+  op: sub
+  args:
+  - op: div
+    args:
+    - var: close
+    - op: ts_mean
+      args:
+      - var: close
+      - const: 20
+  - const: 1
+hypothesis: 价格相对20日均线的位置衡量趋势偏离。
+forward_days: 5
+metrics:
+  mode: cs
+  ic_stats:
+    ic_mean: -0.727371
+    ic_std: 0.124961
+    icir: -5.8208
+    ic_pos_ratio: 0.0
+    valid_days: 56
+  gate1_passed: true
+  gate1_detail:
+    ic_mean: -0.727371
+    icir: -5.8208
+    threshold_ic_mean: 0.02
+    threshold_icir: 0.25
+  gate2_passed: false
+  gate2_detail:
+    max_corr: 0.9398
+    corr_with: close_to_high_20
+    threshold: 0.7
+    skipped: false
+  gate3_passed: true
+  gate3_detail:
+    ic_is_mean: -0.720334
+    ic_oos_mean: -0.743514
+    threshold_oos: 0.01
+  gate4_passed: true
+  gate4_note: ok
+  status: rejected
+  reject_reason: 与库内因子相关过高
+reject_reason: 与库内因子相关过高
+builtin: true
+created_at: '2026-08-25T08:02:00Z'
+updated_at: '2026-08-25T09:15:29Z'

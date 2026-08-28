@@ -1,0 +1,27 @@
+.memoryHintBanner {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto 6px;
+  padding: 8px 10px;
+  font-size: 11px;
+  line-height: 1.45;
+  color: var(--muted);
+  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  border-radius: 10px;
+}
+
+.memoryHintTitle {
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.memoryHintList {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.memoryHintList li {
+  margin: 2px 0;
+}

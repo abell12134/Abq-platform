@@ -1,0 +1,57 @@
+id: vol_20
+name: 20日波动率
+origin: catalog
+status: passed_auto
+theme:
+- volatility
+universe: csi300
+formula: ts_std(sub(div(close, delay(close, 1)), 1), 20)
+expr:
+  op: ts_std
+  args:
+  - op: sub
+    args:
+    - op: div
+      args:
+      - var: close
+      - op: delay
+        args:
+        - var: close
+        - const: 1
+    - const: 1
+  - const: 20
+hypothesis: 已实现波动衡量风险；低波异象预期低波动后续收益更高。
+forward_days: 5
+metrics:
+  mode: cs
+  ic_stats:
+    ic_mean: 0.038743
+    ic_std: 0.521334
+    icir: 0.0743
+    ic_pos_ratio: 0.4727
+    valid_days: 55
+  gate1_passed: false
+  gate1_detail:
+    ic_mean: 0.038743
+    icir: 0.0743
+    threshold_ic_mean: 0.02
+    threshold_icir: 0.25
+  gate2_passed: false
+  gate2_detail:
+    max_corr: 1.0
+    corr_with: idio_vol_20
+    threshold: 0.7
+    skipped: false
+  gate3_passed: true
+  gate3_detail:
+    ic_is_mean: 0.045825
+    ic_oos_mean: 0.022913
+    threshold_oos: 0.01
+  gate4_passed: true
+  gate4_note: ok
+  status: rejected
+  reject_reason: 初筛未过
+reject_reason: 初筛未过
+builtin: true
+created_at: '2026-08-25T08:02:00Z'
+updated_at: '2026-08-25T09:15:36Z'

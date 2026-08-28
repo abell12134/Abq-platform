@@ -1,0 +1,124 @@
+{
+  "id": "default",
+  "name": "默认自选",
+  "realm": "a-share",
+  "members": [
+    {
+      "symbol": "sh600519",
+      "added_at": "",
+      "note": "茅台"
+    },
+    {
+      "symbol": "sh600363",
+      "added_at": "",
+      "note": "联创光电"
+    },
+    {
+      "symbol": "sz300750",
+      "added_at": "",
+      "note": "宁德时代"
+    },
+    {
+      "symbol": "sz002384",
+      "added_at": "",
+      "note": ""
+    },
+    {
+      "symbol": "sz001965",
+      "added_at": "",
+      "note": ""
+    },
+    {
+      "symbol": "sz000977",
+      "added_at": "",
+      "note": ""
+    },
+    {
+      "symbol": "sz000425",
+      "added_at": "",
+      "note": ""
+    },
+    {
+      "symbol": "sz002594",
+      "added_at": "",
+      "note": ""
+    },
+    {
+      "symbol": "sz002241",
+      "added_at": "",
+      "note": ""
+    },
+    {
+      "symbol": "sz000625",
+      "added_at": "",
+      "note": ""
+    },
+    {
+      "symbol": "sz002311",
+      "added_at": "",
+      "note": ""
+    },
+    {
+      "symbol": "sz003816",
+      "added_at": "",
+      "note": ""
+    },
+    {
+      "symbol": "sz002475",
+      "added_at": "",
+      "note": ""
+    },
+    {
+      "symbol": "sz000776",
+      "added_at": "",
+      "note": ""
+    },
+    {
+      "symbol": "sz000157",
+      "added_at": "",
+      "note": ""
+    },
+    {
+      "symbol": "sz000725",
+      "added_at": "",
+      "note": ""
+    },
+    {
+      "symbol": "sz002837",
+      "added_at": "",
+      "note": ""
+    },
+    {
+      "symbol": "sz000651",
+      "added_at": "",
+      "note": ""
+    },
+    {
+      "symbol": "sz002352",
+      "added_at": "",
+      "note": ""
+    },
+    {
+      "symbol": "sz000333",
+      "added_at": "",
+      "note": ""
+    },
+    {
+      "symbol": "sz002415",
+      "added_at": "",
+      "note": ""
+    },
+    {
+      "symbol": "sz000999",
+      "added_at": "",
+      "note": ""
+    },
+    {
+      "symbol": "sz000538",
+      "added_at": "",
+      "note": ""
+    }
+  ],
+  "created_at": "2026-08-25T11:16:06Z",
+  "updated_at": "2026-08-27T12:40:30Z"
+}

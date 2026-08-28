@@ -1,0 +1,5 @@
+id: bear
+name: 看空研究员
+model_tier: primary
+tools: []
+prompt_id: bear-instructions

@@ -1,0 +1,68 @@
+id: excess_mom_20
+name: 超额动量20日
+origin: catalog
+status: passed_auto
+theme:
+- market
+- momentum
+universe: csi300
+formula: sub(sub(div(close, delay(close, 20)), 1), sub(div(mkt_close, delay(mkt_close,
+  20)), 1))
+expr:
+  op: sub
+  args:
+  - op: sub
+    args:
+    - op: div
+      args:
+      - var: close
+      - op: delay
+        args:
+        - var: close
+        - const: 20
+    - const: 1
+  - op: sub
+    args:
+    - op: div
+      args:
+      - var: mkt_close
+      - op: delay
+        args:
+        - var: mkt_close
+        - const: 20
+    - const: 1
+hypothesis: 剔除市场本身动量后的个股超额动量。
+forward_days: 5
+metrics:
+  mode: cs
+  ic_stats:
+    ic_mean: -0.726264
+    ic_std: 0.120575
+    icir: -6.0233
+    ic_pos_ratio: 0.0
+    valid_days: 55
+  gate1_passed: true
+  gate1_detail:
+    ic_mean: -0.726264
+    icir: -6.0233
+    threshold_ic_mean: 0.02
+    threshold_icir: 0.25
+  gate2_passed: false
+  gate2_detail:
+    max_corr: 1.0
+    corr_with: mom_20
+    threshold: 0.7
+    skipped: false
+  gate3_passed: true
+  gate3_detail:
+    ic_is_mean: -0.720769
+    ic_oos_mean: -0.738545
+    threshold_oos: 0.01
+  gate4_passed: true
+  gate4_note: ok
+  status: rejected
+  reject_reason: 与库内因子相关过高
+reject_reason: 与库内因子相关过高
+builtin: true
+created_at: '2026-08-25T08:02:00Z'
+updated_at: '2026-08-25T09:15:30Z'

@@ -1,0 +1,11 @@
+{
+  "portfolios": [
+    {
+      "id": "default",
+      "name": "默认自选",
+      "realm": "a-share",
+      "member_count": 23,
+      "updated_at": "2026-08-27T12:40:30Z"
+    }
+  ]
+}

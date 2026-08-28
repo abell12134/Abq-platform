@@ -1,0 +1,70 @@
+.pfInsightMembers {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pfInsightMembers li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+}
+
+.pfInsightMembers code {
+  font-size: 11px;
+}
+
+.pfInsightMembers .pfName {
+  flex: 1;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.icChart {
+  margin: 10px 0 14px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg);
+}
+
+.icChartHd {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: var(--faint);
+  margin-bottom: 8px;
+}
+
+.icChartSvg {
+  width: 100%;
+  height: 72px;
+  display: block;
+}
+
+.icChartZero {
+  stroke: var(--line);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+
+.icChartLine {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.5;
+}
+
+.icChartArea {
+  fill: rgba(255, 140, 66, 0.12);
+}

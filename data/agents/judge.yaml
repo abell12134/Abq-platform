@@ -1,0 +1,10 @@
+id: judge
+name: 综合研判
+model_tier: primary
+tools:
+  - list_factors
+  - compute_factor
+  - factor_analysis
+  - search_prior_analysis
+  - search_episodes
+prompt_id: judge-instructions

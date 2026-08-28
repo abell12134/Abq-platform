@@ -1,0 +1,324 @@
+{
+  "factors": [
+    {
+      "id": "amihud_10",
+      "name": "Amihud非流动性10日",
+      "origin": "catalog",
+      "status": "passed_auto",
+      "universe": "csi300",
+      "builtin": true,
+      "ic_mean": -0.035519,
+      "updated_at": "2026-08-25T09:15:37Z"
+    },
+    {
+      "id": "amount_ratio_5_20",
+      "name": "额比5/20",
+      "origin": "catalog",
+      "status": "passed_auto",
+      "universe": "csi300",
+      "builtin": true,
+      "ic_mean": -0.6283,
+      "updated_at": "2026-08-25T09:15:31Z"
+    },
+    {
+      "id": "close_to_high_20",
+      "name": "收盘相对20日高点",
+      "origin": "catalog",
+      "status": "passed_auto",
+      "universe": "csi300",
+      "builtin": true,
+      "ic_mean": -0.740307,
+      "updated_at": "2026-08-25T09:15:28Z"
+    },
+    {
+      "id": "close_to_low_20",
+      "name": "收盘相对20日低点",
+      "origin": "catalog",
+      "status": "passed_auto",
+      "universe": "csi300",
+      "builtin": true,
+      "ic_mean": -0.624364,
+      "updated_at": "2026-08-25T09:15:32Z"
+    },
+    {
+      "id": "excess_mom_20",
+      "name": "超额动量20日",
+      "origin": "catalog",
+      "status": "passed_auto",
+      "universe": "csi300",
+      "builtin": true,
+      "ic_mean": -0.726264,
+      "updated_at": "2026-08-25T09:15:30Z"
+    },
+    {
+      "id": "high_low_range_20",
+      "name": "20日振幅",
+      "origin": "catalog",
+      "status": "passed_auto",
+      "universe": "csi300",
+      "builtin": true,
+      "ic_mean": 0.134379,
+      "updated_at": "2026-08-25T09:15:34Z"
+    },
+    {
+      "id": "idio_vol_20",
+      "name": "特异波动20日",
+      "origin": "catalog",
+      "status": "passed_auto",
+      "universe": "csi300",
+      "builtin": true,
+      "ic_mean": 0.038743,
+      "updated_at": "2026-08-25T09:15:35Z"
+    },
+    {
+      "id": "intraday_range",
+      "name": "日内振幅",
+      "origin": "catalog",
+      "status": "passed_auto",
+      "universe": "csi300",
+      "builtin": true,
+      "ic_mean": -0.018693,
+      "updated_at": "2026-08-25T09:15:39Z"
+    },
+    {
+      "id": "ma_bias_20",
+      "name": "20日均线偏离",
+      "origin": "catalog",
+      "status": "passed_auto",
+      "universe": "csi300",
+      "builtin": true,
+      "ic_mean": -0.727371,
+      "updated_at": "2026-08-25T09:15:29Z"
+    },
+    {
+      "id": "ma_bias_5",
+      "name": "5日均线偏离",
+      "origin": "catalog",
+      "status": "passed_auto",
+      "universe": "csi300",
+      "builtin": true,
+      "ic_mean": -0.427307,
+      "updated_at": "2026-08-25T09:15:34Z"
+    },
+    {
+      "id": "mom_20",
+      "name": "20日动量",
+      "origin": "catalog",
+      "status": "passed_auto",
+      "universe": "csi300",
+      "builtin": true,
+      "ic_mean": -0.726264,
+      "updated_at": "2026-08-25T09:15:30Z"
+    },
+    {
+      "id": "mom_5",
+      "name": "5日动量",
+      "origin": "catalog",
+      "status": "passed_auto",
+      "universe": "csi300",
+      "builtin": true,
+      "ic_mean": -0.592164,
+      "updated_at": "2026-08-25T09:15:33Z"
+    },
+    {
+      "id": "mom_60",
+      "name": "60日动量",
+      "origin": "catalog",
+      "status": "passed_auto",
+      "universe": "csi300",
+      "builtin": true,
+      "ic_mean": -0.997505,
+      "updated_at": "2026-08-25T09:15:27Z"
+    },
+    {
+      "id": "pv_corr_20",
+      "name": "量价相关20日",
+      "origin": "catalog",
+      "status": "passed_auto",
+      "universe": "csi300",
+      "builtin": true,
+      "ic_mean": -0.025779,
+      "updated_at": "2026-08-25T09:15:38Z"
+    },
+    {
+      "id": "rel_close",
+      "name": "相对大盘价格",
+      "origin": "catalog",
+      "status": "passed_auto",
+      "universe": "csi300",
+      "builtin": true,
+      "ic_mean": -0.03042,
+      "updated_at": "2026-08-25T09:15:38Z"
+    },
+    {
+      "id": "rel_volume_5",
+      "name": "量能相对大盘5日",
+      "origin": "catalog",
+      "status": "passed_auto",
+      "universe": "csi300",
+      "builtin": true,
+      "ic_mean": 0.03635,
+      "updated_at": "2026-08-25T09:15:36Z"
+    },
+    {
+      "id": "rev_5",
+      "name": "5日反转",
+      "origin": "catalog",
+      "status": "passed_auto",
+      "universe": "csi300",
+      "builtin": true,
+      "ic_mean": 0.592248,
+      "updated_at": "2026-08-25T09:15:32Z"
+    },
+    {
+      "id": "timing_mom_20",
+      "name": "大盘20日动量（择时）",
+      "origin": "catalog",
+      "status": "passed_auto",
+      "universe": "market",
+      "builtin": true,
+      "ic_mean": -0.498274,
+      "updated_at": "2026-08-25T09:15:33Z"
+    },
+    {
+      "id": "timing_vol_20",
+      "name": "大盘20日波动（择时）",
+      "origin": "catalog",
+      "status": "passed_auto",
+      "universe": "market",
+      "builtin": true,
+      "ic_mean": 0.677458,
+      "updated_at": "2026-08-25T09:15:30Z"
+    },
+    {
+      "id": "vol_20",
+      "name": "20日波动率",
+      "origin": "catalog",
+      "status": "passed_auto",
+      "universe": "csi300",
+      "builtin": true,
+      "ic_mean": 0.038743,
+      "updated_at": "2026-08-25T09:15:36Z"
+    },
+    {
+      "id": "vol_5",
+      "name": "5日波动率",
+      "origin": "catalog",
+      "status": "passed_auto",
+      "universe": "csi300",
+      "builtin": true,
+      "ic_mean": 0.015113,
+      "updated_at": "2026-08-25T09:15:40Z"
+    },
+    {
+      "id": "vol_ratio_5_20",
+      "name": "量比5/20",
+      "origin": "catalog",
+      "status": "passed_auto",
+      "universe": "csi300",
+      "builtin": true,
+      "ic_mean": null,
+      "updated_at": "2026-08-25T09:15:40Z"
+    },
+    {
+      "id": "gp_mkt_5cddb9",
+      "name": "GP择时 abs(abs(mkt_close))",
+      "origin": "gp",
+      "status": "passed_auto",
+      "universe": "market",
+      "builtin": false,
+      "ic_mean": -0.897618,
+      "updated_at": "2026-08-25T09:15:28Z"
+    },
+    {
+      "id": "gp_mkt_ac7709",
+      "name": "GP择时 abs(mkt_close)",
+      "origin": "gp",
+      "status": "passed_auto",
+      "universe": "market",
+      "builtin": false,
+      "ic_mean": -0.897618,
+      "updated_at": "2026-08-25T09:15:28Z"
+    },
+    {
+      "id": "gp_mkt_c42cde",
+      "name": "GP择时 add(sub(div(mkt_close, delay(mkt_close, …",
+      "origin": "gp",
+      "status": "passed_auto",
+      "universe": "market",
+      "builtin": false,
+      "ic_mean": -0.903516,
+      "updated_at": "2026-08-25T09:15:27Z"
+    },
+    {
+      "id": "gp_mkt_f56079",
+      "name": "GP择时 mkt_close",
+      "origin": "gp",
+      "status": "passed_auto",
+      "universe": "market",
+      "builtin": false,
+      "ic_mean": -0.897618,
+      "updated_at": "2026-08-25T09:15:28Z"
+    },
+    {
+      "id": "llm_momentum_160ce0",
+      "name": "区间位置动量",
+      "origin": "llm",
+      "status": "rejected",
+      "universe": "csi300",
+      "builtin": false,
+      "ic_mean": -0.769295,
+      "updated_at": "2026-08-25T11:40:32Z"
+    },
+    {
+      "id": "llm_momentum_1b1ebf",
+      "name": "相对强弱动量",
+      "origin": "llm",
+      "status": "rejected",
+      "universe": "csi300",
+      "builtin": false,
+      "ic_mean": -0.727368,
+      "updated_at": "2026-08-25T11:39:15Z"
+    },
+    {
+      "id": "llm_momentum_5d00d6",
+      "name": "波动率调整动量",
+      "origin": "llm",
+      "status": "rejected",
+      "universe": "csi300",
+      "builtin": false,
+      "ic_mean": -0.734559,
+      "updated_at": "2026-08-25T11:39:14Z"
+    },
+    {
+      "id": "llm_momentum_e79867",
+      "name": "动量加速度",
+      "origin": "llm",
+      "status": "rejected",
+      "universe": "csi300",
+      "builtin": false,
+      "ic_mean": -0.676056,
+      "updated_at": "2026-08-25T11:40:33Z"
+    },
+    {
+      "id": "synth_a_mom",
+      "name": "A",
+      "origin": "manual",
+      "status": "rejected",
+      "universe": "csi300",
+      "builtin": false,
+      "ic_mean": -0.553028,
+      "updated_at": "2026-08-25T11:04:06Z"
+    },
+    {
+      "id": "synth_b_rev",
+      "name": "B",
+      "origin": "manual",
+      "status": "rejected",
+      "universe": "csi300",
+      "builtin": false,
+      "ic_mean": 0.552432,
+      "updated_at": "2026-08-25T11:04:06Z"
+    }
+  ]
+}

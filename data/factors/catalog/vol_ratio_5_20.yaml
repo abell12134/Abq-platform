@@ -1,0 +1,54 @@
+id: vol_ratio_5_20
+name: 量比5/20
+origin: catalog
+status: passed_auto
+theme:
+- volume
+universe: csi300
+formula: div(ts_mean(volume, 5), ts_mean(volume, 20))
+expr:
+  op: div
+  args:
+  - op: ts_mean
+    args:
+    - var: volume
+    - const: 5
+  - op: ts_mean
+    args:
+    - var: volume
+    - const: 20
+hypothesis: 近5日成交量相对20日均量放大，资金关注度上升。
+forward_days: 5
+metrics:
+  mode: cs
+  ic_stats:
+    ic_mean: null
+    ic_std: null
+    icir: null
+    ic_pos_ratio: null
+    valid_days: 0
+  gate1_passed: false
+  gate1_detail:
+    ic_mean: null
+    icir: null
+    threshold_ic_mean: 0.02
+    threshold_icir: 0.25
+  gate2_passed: true
+  gate2_detail:
+    max_corr: null
+    corr_with: null
+    threshold: 0.7
+    skipped: false
+  gate3_passed: false
+  gate3_detail:
+    ic_is_mean: null
+    ic_oos_mean: null
+    threshold_oos: 0.01
+  gate4_passed: true
+  gate4_note: ok
+  status: rejected
+  reject_reason: 初筛未过
+reject_reason: 初筛未过
+builtin: true
+created_at: '2026-08-25T08:02:00Z'
+updated_at: '2026-08-25T09:15:40Z'

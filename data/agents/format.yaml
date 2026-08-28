@@ -1,0 +1,5 @@
+id: format
+name: 格式化
+model_tier: local
+tools: []
+prompt_id: format-instructions

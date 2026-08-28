@@ -1,0 +1,54 @@
+id: close_to_low_20
+name: 收盘相对20日低点
+origin: catalog
+status: passed_auto
+theme:
+- reversal
+universe: csi300
+formula: sub(div(close, ts_min(low, 20)), 1)
+expr:
+  op: sub
+  args:
+  - op: div
+    args:
+    - var: close
+    - op: ts_min
+      args:
+      - var: low
+      - const: 20
+  - const: 1
+hypothesis: 远离20日低点越多越强；贴近日低可能超卖。
+forward_days: 5
+metrics:
+  mode: cs
+  ic_stats:
+    ic_mean: -0.624364
+    ic_std: 0.169223
+    icir: -3.6896
+    ic_pos_ratio: 0.0
+    valid_days: 56
+  gate1_passed: true
+  gate1_detail:
+    ic_mean: -0.624364
+    icir: -3.6896
+    threshold_ic_mean: 0.02
+    threshold_icir: 0.25
+  gate2_passed: false
+  gate2_detail:
+    max_corr: 0.8738
+    corr_with: ma_bias_20
+    threshold: 0.7
+    skipped: false
+  gate3_passed: true
+  gate3_detail:
+    ic_is_mean: -0.622718
+    ic_oos_mean: -0.62814
+    threshold_oos: 0.01
+  gate4_passed: true
+  gate4_note: ok
+  status: rejected
+  reject_reason: 与库内因子相关过高
+reject_reason: 与库内因子相关过高
+builtin: true
+created_at: '2026-08-25T08:02:00Z'
+updated_at: '2026-08-25T09:15:32Z'

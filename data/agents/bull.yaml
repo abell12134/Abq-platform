@@ -1,0 +1,5 @@
+id: bull
+name: 看多研究员
+model_tier: primary
+tools: []
+prompt_id: bull-instructions

@@ -1,0 +1,7 @@
+id: fundamental
+name: 基本面
+model_tier: primary
+tools:
+  - list_factors
+  - compute_factor
+prompt_id: fundamental-instructions

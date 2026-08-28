@@ -1,0 +1,65 @@
+id: amihud_10
+name: Amihud非流动性10日
+origin: catalog
+status: passed_auto
+theme:
+- liquidity
+universe: csi300
+formula: ts_mean(div(abs(sub(div(close, delay(close, 1)), 1)), add(amount, 1)), 10)
+expr:
+  op: ts_mean
+  args:
+  - op: div
+    args:
+    - op: abs
+      args:
+      - op: sub
+        args:
+        - op: div
+          args:
+          - var: close
+          - op: delay
+            args:
+            - var: close
+            - const: 1
+        - const: 1
+    - op: add
+      args:
+      - var: amount
+      - const: 1
+  - const: 10
+hypothesis: 单位成交额对应的价格冲击越大，非流动性溢价越高。
+forward_days: 5
+metrics:
+  mode: cs
+  ic_stats:
+    ic_mean: -0.035519
+    ic_std: 0.208439
+    icir: -0.1704
+    ic_pos_ratio: 0.4462
+    valid_days: 65
+  gate1_passed: false
+  gate1_detail:
+    ic_mean: -0.035519
+    icir: -0.1704
+    threshold_ic_mean: 0.02
+    threshold_icir: 0.25
+  gate2_passed: false
+  gate2_detail:
+    max_corr: -0.8674
+    corr_with: rel_close
+    threshold: 0.7
+    skipped: false
+  gate3_passed: true
+  gate3_detail:
+    ic_is_mean: -0.03738
+    ic_oos_mean: -0.031331
+    threshold_oos: 0.01
+  gate4_passed: true
+  gate4_note: ok
+  status: rejected
+  reject_reason: 初筛未过
+reject_reason: 初筛未过
+builtin: true
+created_at: '2026-08-25T08:02:00Z'
+updated_at: '2026-08-25T09:15:37Z'

@@ -1,0 +1,69 @@
+.screenCard {
+  border: 1px solid var(--border, #2a2a2e);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  background: var(--surface, #16161a);
+  max-width: 560px;
+}
+
+.screenCardHead {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: baseline;
+  margin-bottom: 0.6rem;
+}
+
+.screenMeta {
+  font-size: 0.75rem;
+  opacity: 0.65;
+}
+
+.screenTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  margin-bottom: 0.75rem;
+}
+
+.screenTable th,
+.screenTable td {
+  text-align: left;
+  padding: 0.28rem 0.4rem;
+  border-bottom: 1px solid var(--border, #2a2a2e);
+}
+
+.screenActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.screenActions select,
+.screenActions button {
+  font-size: 0.8rem;
+  padding: 0.3rem 0.55rem;
+  border-radius: 6px;
+  border: 1px solid var(--border, #2a2a2e);
+  background: var(--bg, #0f0f12);
+  color: inherit;
+}
+
+.screenPrimary {
+  background: var(--accent, #3d6) !important;
+  color: #111 !important;
+  border-color: transparent !important;
+}
+
+.screenOk {
+  font-size: 0.8rem;
+  color: #3fb950;
+  margin-bottom: 0.5rem;
+}
+
+.screenErr {
+  font-size: 0.8rem;
+  color: #e88;
+  margin-bottom: 0.5rem;
+}

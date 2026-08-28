@@ -1,0 +1,52 @@
+id: intraday_range
+name: 日内振幅
+origin: catalog
+status: passed_auto
+theme:
+- volatility
+- microstructure
+universe: csi300
+formula: div(sub(high, low), close)
+expr:
+  op: div
+  args:
+  - op: sub
+    args:
+    - var: high
+    - var: low
+  - var: close
+hypothesis: 当日高低价差相对收盘价衡量盘中波动。
+forward_days: 5
+metrics:
+  mode: cs
+  ic_stats:
+    ic_mean: -0.018693
+    ic_std: 0.34558
+    icir: -0.0541
+    ic_pos_ratio: 0.48
+    valid_days: 75
+  gate1_passed: false
+  gate1_detail:
+    ic_mean: -0.018693
+    icir: -0.0541
+    threshold_ic_mean: 0.02
+    threshold_icir: 0.25
+  gate2_passed: true
+  gate2_detail:
+    max_corr: 0.124
+    corr_with: rel_close
+    threshold: 0.7
+    skipped: false
+  gate3_passed: true
+  gate3_detail:
+    ic_is_mean: -0.013555
+    ic_oos_mean: -0.03031
+    threshold_oos: 0.01
+  gate4_passed: true
+  gate4_note: ok
+  status: rejected
+  reject_reason: 初筛未过
+reject_reason: 初筛未过
+builtin: true
+created_at: '2026-08-25T08:02:00Z'
+updated_at: '2026-08-25T09:15:39Z'

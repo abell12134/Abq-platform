@@ -1,0 +1,213 @@
+.sessBlock {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border-top: 1px solid var(--line);
+}
+
+.sessHead {
+  padding: 14px 16px 8px;
+}
+
+.sessHead span {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--faint);
+  text-transform: uppercase;
+}
+
+.sessNewChat {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: calc(100% - 16px);
+  margin: 0 8px 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--accent-line);
+  background: var(--accent-dim);
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 600;
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    color 0.15s,
+    transform 0.1s;
+}
+
+.sessNewChat:hover:not(:disabled) {
+  background: rgba(232, 145, 58, 0.22);
+  border-color: var(--accent);
+  color: #f0a04a;
+}
+
+.sessNewChat:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.sessNewChat:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.sessNewChatIcon {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: var(--accent);
+  color: #1a1208;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.sessNewChatLabel {
+  letter-spacing: 0.02em;
+}
+
+.sessList {
+  flex: 1;
+  overflow: auto;
+  padding: 0 8px 8px;
+  min-height: 0;
+}
+
+.sessEmpty {
+  color: var(--faint);
+  font-size: 12px;
+  padding: 8px 10px;
+}
+
+.sessErr {
+  color: #e88;
+  font-size: 11px;
+  padding: 4px 16px 0;
+}
+
+.sessRow {
+  display: flex;
+  align-items: stretch;
+  border-radius: 8px;
+  position: relative;
+}
+
+.sessRow:hover .sessDel,
+.sessRow.active .sessDel {
+  opacity: 1;
+}
+
+.sessRow.active {
+  background: var(--bg-3);
+}
+
+.sessDel {
+  flex: 0 0 28px;
+  align-self: center;
+  margin-right: 4px;
+  background: transparent;
+  border: 0;
+  color: var(--faint);
+  font-size: 16px;
+  line-height: 1;
+  padding: 4px;
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.15s, color 0.15s, background 0.15s;
+}
+
+.sessDel:hover:not(:disabled) {
+  color: #e88;
+  background: rgba(200, 80, 80, 0.12);
+}
+
+.sessDel:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+.sessItem {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  padding: 8px 4px 8px 26px;
+  position: relative;
+  color: var(--muted);
+}
+
+.sessItem:hover:not(:disabled) {
+  color: var(--text);
+}
+
+.sessRow.active .sessItem {
+  color: var(--text);
+}
+
+.sessItem:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.sessItem .dot {
+  position: absolute;
+  left: 10px;
+  top: 13px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.sessItem .dot.ok {
+  background: var(--ok);
+}
+
+.sessItem .dot.run {
+  background: var(--run);
+  box-shadow: 0 0 0 2px rgba(208, 164, 65, 0.25);
+  animation: pulse 1.4s infinite;
+}
+
+.sessItem .dot.err {
+  background: #c45c5c;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.45;
+  }
+}
+
+.sessItem b {
+  display: block;
+  font-weight: 500;
+  font-size: 12.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sessKind {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-dim);
+  vertical-align: 0.05em;
+}
+
+.sessItem small {
+  display: block;
+  color: var(--faint);
+  font-size: 11px;
+  margin-top: 2px;
+}
